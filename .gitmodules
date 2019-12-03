@@ -17,3 +17,6 @@
 [submodule "1_develop/catkin_ws/src/codequackers"]
 	path = 1_develop/catkin_ws/src/codequackers
 	url = https://github.com/lebrice/codequackers.git
+[submodule "1_develop/catkin_ws/src/--force"]
+	path = 1_develop/catkin_ws/src/--force
+	url = https://github.com/lebrice/codequackers.git
