@@ -20,6 +20,8 @@ class ROSBaselineAgent(object):
         uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
         # roslaunch.configure_logging(uuid)
         # print('configured logging 2')
+        # our_launch_path = "codequackers/packages/pure_pursuit/launch/pure_pursuit.launch"
+        # roslaunch_path = os.path.join(os.getcwd(), our_launch_path)
         roslaunch_path = os.path.join(os.getcwd(), "lf_slim.launch")
         logger.info('Creating ROSLaunchParent')
         self.launch = roslaunch.parent.ROSLaunchParent(uuid, [roslaunch_path])
