@@ -14,3 +14,6 @@
 	path = 1_develop/catkin_ws/src/dt-car-interface
 	url = https://github.com/duckietown/dt-car-interface.git
         branch = daffy
+[submodule "1_develop/catkin_ws/src/codequackers"]
+	path = 1_develop/catkin_ws/src/codequackers
+	url = https://github.com/lebrice/codequackers.git
