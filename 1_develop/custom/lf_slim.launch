@@ -11,7 +11,8 @@
     <arg name="/lane_following/line_detection" default="true"/>
     <arg name="/lane_following/lane_filter" default="true"/>
     <arg name="/lane_following/ground_projection" default="true"/>
-    <arg name="/lane_following/lane_controller" default="true"/>
+    <arg name="/lane_following/lane_controller" default="false"/>
+    <arg name="/lane_following/pure_pursuit_controller" default="true"/>
     <arg name="visualization" default="true"/>
     
     <!-- Start Lane Control -->
@@ -58,7 +59,25 @@
                 <arg name="veh" value="$(arg veh)"/>
                 <!-- <arg name="param_file_name" value="$(arg param_file_name)"/> -->
             </include>
+
+        <!-- My Pure Pursuit Lane controller -->
+        <group if="$(arg /lane_following/pure_pursuit_controller)">
+            <remap from="pure_pursuit_controller_node/seglist_filtered" to="lane_filter_node/seglist_filtered"/>
+            <remap from="pure_pursuit_controller_node/car_cmd" to="lane_controller_node/car_cmd"/>
+
+            <include file="$(find pure_pursuit)/launch/pure_pursuit_controller_node.launch">
+                <arg name="veh" value="$(arg veh)"/>
+                <arg name="node_name" value="pure_pursuit_controller_node"/>
+                <!-- Used to choose wether to use the regular pure-pursuit or the 'enhanced' one. -->
+                <arg name="node_script" value="pure_pursuit_controller_node_better"/>
+                <!-- <arg name="node_script" value="pure_pursuit_controller_node"/> -->
+                <!-- TODO: use this to pass a specific parameter file. (not needed here.) -->
+                <arg name="param_file_name" value="$(arg param_file_name)"/>
+            </include>
         </group>
+
+
+    </group>
 
 	<group if="$(arg visualization)">
           <remap from="duckiebot_visualizer/segment_list" to="ground_projection/lineseglist_out"/>
@@ -83,9 +102,8 @@
     <include file="$(find dagu_car)/launch/kinematics_node.launch">
         <arg name="veh" value="$(arg veh)"/>
         <arg name="param_file_name" value="$(arg param_file_name)"/>
-    </include>
+    </include>  
 
-    
     <!-- Start Test Node -->
 <!--         <node pkg="dt_dependent_node" name="dt_dependent_node" type="dt_dependent_node.py" output="screen" />  -->
     <!-- End Test Node -->

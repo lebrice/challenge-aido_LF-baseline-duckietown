@@ -20,9 +20,9 @@ class ROSBaselineAgent(object):
         uuid = roslaunch.rlutil.get_or_generate_uuid(None, False)
         # roslaunch.configure_logging(uuid)
         # print('configured logging 2')
-        # our_launch_path = "codequackers/packages/pure_pursuit/launch/pure_pursuit.launch"
-        # roslaunch_path = os.path.join(os.getcwd(), our_launch_path)
-        roslaunch_path = os.path.join(os.getcwd(), "lf_slim.launch")
+        our_launch_path = "custom_ws/src/codequackers/packages/pure_pursuit/launch/pure_pursuit.launch"
+        roslaunch_path = os.path.join(os.getcwd(), our_launch_path)
+        # roslaunch_path = os.path.join(os.getcwd(), "lf_slim.launch")
         logger.info('Creating ROSLaunchParent')
         self.launch = roslaunch.parent.ROSLaunchParent(uuid, [roslaunch_path])
 
@@ -46,6 +46,7 @@ class ROSBaselineAgent(object):
 
     def on_received_observations(self, context, data):
         logger.info("received observation")
+        print("received observation (print statement)")
         jpg_data = data['camera']['jpg_data']
         obs = jpg2rgb(jpg_data)
         self.agent._publish_img(obs)

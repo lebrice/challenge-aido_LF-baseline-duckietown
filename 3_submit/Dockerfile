@@ -27,8 +27,9 @@ COPY lf_slim.launch ./
 RUN /bin/bash -c "mkdir -p custom_ws/src/"
 
 ## Copy or init your packages in here
-COPY codequackers custom_ws/src/codequackers
-RUN chmod +x custom_ws/src/codequackers/packages/pure_pursuit/src/pure_pursuit_controller_node_better.py
+COPY codequackers ./custom_ws/src/codequackers
+RUN chmod +x ./custom_ws/src/codequackers/packages/pure_pursuit/src/pure_pursuit_controller_node_better.py
+RUN chmod +x ./custom_ws/src/codequackers/packages/pure_pursuit/src/pure_pursuit_controller_node.py
 
 ## Do not change the below line! This ensures that your workspace is overlayed on top of the Duckietown stack!
 ## MAKE sure this line is present in the build: This workspace overlays: /code/catkin_ws/devel;/opt/ros/kinetic
