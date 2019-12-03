@@ -107,7 +107,7 @@ class PointTracker(object):
             self.last_update_time = current_time
 
         if current_time <= self.last_update_time:
-            print("Weird, the update points callback has same current and previous time")
+            # print("Weird, the update points callback has same current and previous time.")
             return
 
         with self.buffer_lock:
