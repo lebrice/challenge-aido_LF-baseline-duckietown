@@ -46,7 +46,6 @@ class ROSBaselineAgent(object):
 
     def on_received_observations(self, context, data):
         logger.info("received observation")
-        print("received observation (print statement)")
         jpg_data = data['camera']['jpg_data']
         obs = jpg2rgb(jpg_data)
         self.agent._publish_img(obs)
